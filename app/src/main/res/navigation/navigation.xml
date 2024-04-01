@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/navigation"
+            app:startDestination="@id/SearchTitleFragment">
+
+    <fragment
+            android:id="@+id/SearchTitleFragment"
+            android:name="com.example.tvapp.presentation.search.SearchTitleFragment"
+            tools:layout="@layout/fragment_search_title">
+        <action
+            android:id="@+id/action_SearchTitleFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment"
+            app:popUpTo="@id/SearchTitleFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/detailsFragment"
+            android:name="com.example.tvapp.presentation.details.DetailsFragment"
+            tools:layout="@layout/details_fragment">
+        <argument
+                android:name="tvshow"
+                app:argType="com.example.tvapp.domain.model.TvShow" />
+    </fragment>
+</navigation>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_start">16dp</dimen>
+    <dimen name="margin_top">16dp</dimen>
+    <dimen name="margin_end">320dp</dimen>
+    <dimen name="margin_bottom">16dp</dimen>
+    <dimen name="textview_margin">24dp</dimen>
+    <dimen name="genre_textview_textsize">12sp</dimen>
+</resources>
