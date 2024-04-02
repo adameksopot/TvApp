@@ -37,13 +37,6 @@ class TvMazeShowResponseAdapter(private val onMovieClick: (TvShow) -> Unit) :
     ) {
         val movie = movies[position]
         holder.movieTitle.text = movie.name
-        holder.movieGenre.showIfNotEmpty(movie.genres?.joinToString())
-        movie.countryName?.let {
-            holder.movieYear.showIfAtLeastOneNotEmpty(
-                text = it,
-                textTwo = movie.releaseDate?.year.toString()
-            )
-        }
 
         Glide.with(holder.itemView.context).load(movie.imageUrls?.original)
             .diskCacheStrategy(DiskCacheStrategy.ALL)

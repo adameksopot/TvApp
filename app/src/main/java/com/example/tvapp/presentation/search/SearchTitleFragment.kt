@@ -8,6 +8,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tvapp.App
 import com.example.tvapp.R
@@ -48,6 +49,7 @@ class SearchTitleFragment : Fragment(R.layout.fragment_search_title) {
         recyclerView.apply {
             setHasFixedSize(true)
             adapter = this@SearchTitleFragment.adapter
+            layoutManager = GridLayoutManager(this.context, 2)
         }
     }
 
