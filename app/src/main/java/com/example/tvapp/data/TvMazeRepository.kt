@@ -9,8 +9,19 @@ class TvMazeRepositoryImpl @Inject constructor(
     private val mapper: TvShowMapper,
 ) : TvMazeRepository {
 
-    override suspend fun getApiResponse(query: String): List<TvShow> {
-        val response = api.searchMovies(query)
-        return response.map { mapper.map(it) }
+    override suspend fun searchForShows(query: String): List<TvShow> {
+        return try {
+            api.searchMovies(query).map { mapper.map(it) }
+        } catch (e: Throwable) {
+            emptyList()
+        }
+    }
+
+    override suspend fun searchSingleShow(query: String): TvShow? {
+        return try {
+            mapper.mapSingleShow(api.searchMovie(query))
+        } catch (e: Throwable) {
+            null
+        }
     }
 }

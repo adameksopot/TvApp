@@ -6,36 +6,34 @@ import android.view.MenuInflater
 import android.view.View
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.tvapp.App
 import com.example.tvapp.R
-import com.example.tvapp.presentation.di.DaggerSearchTitleComponent
-import com.example.tvapp.utils.daggerViewModels
-import kotlinx.coroutines.flow.collectLatest
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
-
+@AndroidEntryPoint
 class SearchTitleFragment : Fragment(R.layout.fragment_search_title) {
 
-    val viewModel: SearchViewModel by daggerViewModels { requireActivity() }
+    val viewModel: SearchViewModel by activityViewModels()
     private lateinit var adapter: TvMazeShowResponseAdapter
     private lateinit var recyclerView: RecyclerView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        DaggerSearchTitleComponent
-            .builder()
-            .appComponent((requireActivity().application as App).getAppComponent())
-            .build()
-            .inject(this)
 
         recyclerView = requireView().findViewById(R.id.recycler_view)
 
-        lifecycleScope.launchWhenStarted {
-            viewModel.moviesStateFlow.collectLatest {
-                adapter.setMoviesList(it)
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                viewModel.moviesStateFlow.collect {
+                    adapter.setMoviesList(it)
+                }
             }
         }
         setHasOptionsMenu(true)
@@ -51,6 +49,7 @@ class SearchTitleFragment : Fragment(R.layout.fragment_search_title) {
             adapter = this@SearchTitleFragment.adapter
             layoutManager = GridLayoutManager(this.context, 2)
         }
+        activity?.title = "TvApp"
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

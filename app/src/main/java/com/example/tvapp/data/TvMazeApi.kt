@@ -1,5 +1,6 @@
 package com.example.tvapp.data
 
+import com.example.tvapp.data.model.TvMazeResponse
 import com.example.tvapp.data.model.TvMazeShowResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -13,4 +14,7 @@ interface TvMazeApi {
 
     @GET("search/shows")
     suspend fun searchMovies(@Query("q") query: String): List<TvMazeShowResponse>
+
+    @GET("singlesearch/shows")
+    suspend fun searchMovie(@Query("q") query: String): TvMazeResponse
 }

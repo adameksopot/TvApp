@@ -4,11 +4,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tvapp.domain.TvMazeRepository
 import com.example.tvapp.domain.model.TvShow
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class SearchViewModel @Inject constructor(
     private val api: TvMazeRepository,
 ) : ViewModel() {
@@ -18,7 +20,7 @@ class SearchViewModel @Inject constructor(
 
     fun searchMovies(query: String) {
         viewModelScope.launch {
-            val response = api.getApiResponse(query)
+            val response = api.searchForShows(query)
             _moviesStateFlow.value = response
         }
     }

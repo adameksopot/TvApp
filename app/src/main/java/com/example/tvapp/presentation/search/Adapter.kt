@@ -8,11 +8,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.tvapp.R
 import com.example.tvapp.domain.model.TvShow
-import com.example.tvapp.utils.showIfAtLeastOneNotEmpty
-import com.example.tvapp.utils.showIfNotEmpty
 
 
-class TvMazeShowResponseAdapter(private val onMovieClick: (TvShow) -> Unit) :
+class TvMazeShowResponseAdapter(private val onMovieClick: (String) -> Unit) :
     RecyclerView.Adapter<TvMazeShowResponseViewHolder>() {
     private var movies = mutableListOf<TvShow>()
 
@@ -43,7 +41,7 @@ class TvMazeShowResponseAdapter(private val onMovieClick: (TvShow) -> Unit) :
             .into(holder.moviePoster)
 
         holder.itemView.setOnClickListener {
-            onMovieClick(movie)
+            onMovieClick(movie.name)
         }
     }
 

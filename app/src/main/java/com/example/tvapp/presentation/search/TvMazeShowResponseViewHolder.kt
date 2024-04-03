@@ -8,7 +8,7 @@ import com.example.tvapp.R
 
 class TvMazeShowResponseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    val movieTitle: TextView = itemView.findViewById(R.id.MovieTitleTextView)
+    val movieTitle: TextView = itemView.findViewById(R.id.MovieLengthTextView)
     val moviePoster: ImageView = itemView.findViewById(R.id.MoviePosterImageView)
 
 }

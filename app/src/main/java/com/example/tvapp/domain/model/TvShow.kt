@@ -5,9 +5,9 @@ import java.time.LocalDate
 
 data class TvShow(
     val id: Int,
-    val name: String?,
+    val name: String,
     val genres: List<String>?,
-    val summary: String?,
+    val summary: String,
     val schedule: TvMazeSchedule?,
     val imageUrls: TvMazeImageUrls?,
     val countryName: String?,

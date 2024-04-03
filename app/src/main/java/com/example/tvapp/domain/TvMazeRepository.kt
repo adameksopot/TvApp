@@ -4,5 +4,6 @@ import com.example.tvapp.domain.model.TvShow
 
 
 interface TvMazeRepository {
-    suspend fun getApiResponse(query: String): List<TvShow>
+    suspend fun searchForShows(query: String): List<TvShow>
+    suspend fun searchSingleShow(query: String): TvShow?
 }
